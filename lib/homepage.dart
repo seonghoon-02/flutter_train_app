@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_train_app/seatpage.dart';
 import 'package:flutter_train_app/stationlistpage.dart';
 
 class HomePage extends StatelessWidget {
@@ -54,7 +55,13 @@ class HomePage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20))),
 
                   ///버튼 선택시 호출할 함수
-                  onPressed: () {},
+                  onPressed: () {
+                    /// 화면 이동 코드 SeatPage로 이동
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return SeatPage();
+                    }));
+                  },
                   child: Text(
                     '좌석선택',
                     style: TextStyle(
@@ -73,7 +80,12 @@ class HomePage extends StatelessWidget {
   Widget choiceStation(
       String kindStation, String choiceStation, BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        /// 화면 이동 코드 StationListPage로 이동
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return StationListPage();
+        }));
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -96,36 +108,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-
-//   Widget choiceStation(
-//       String kindStation, String choiceStation, BuildContext context) {
-//     return GestureDetector(
-//       onTap: () {
-//         // 화면 이동 코드
-//         Navigator.push(
-//           MaterialPageRoute(builder: (context) => StationListPage()),
-//         );
-//       },
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           Text(
-//             kindStation,
-//             style: TextStyle(
-//               fontSize: 16,
-//               fontWeight: FontWeight.bold,
-//               color: Colors.grey,
-//             ),
-//           ),
-//           Text(
-//             choiceStation,
-//             style: TextStyle(
-//               fontSize: 40,
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

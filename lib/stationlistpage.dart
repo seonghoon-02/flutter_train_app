@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-class StationLostPage extends StatelessWidget {
+class StationListPage extends StatelessWidget {
+  StationListPage();
+
   @override
   Widget build(BuildContext context) {
     return Text('StationLostPage');
