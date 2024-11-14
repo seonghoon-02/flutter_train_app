@@ -78,19 +78,19 @@ class HomePage extends StatelessWidget {
   }
 
   Widget choiceStation(
-      String kindStation, String choiceStation, BuildContext context) {
+      String stationType, String choiceStation, BuildContext context) {
     return GestureDetector(
       onTap: () {
         /// 화면 이동 코드 StationListPage로 이동
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return StationListPage();
+          return StationListPage(stationType);
         }));
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            kindStation,
+            stationType,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
