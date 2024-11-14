@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_train_app/seatpage.dart';
-import 'package:flutter_train_app/stationlistpage.dart';
+import 'package:flutter_train_app/seat_page.dart';
+import 'package:flutter_train_app/station_list_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -59,7 +59,7 @@ class HomePage extends StatelessWidget {
                     /// 화면 이동 코드 SeatPage로 이동
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return SeatPage();
+                      return SeatPage('수서', '부산');
                     }));
                   },
                   child: Text(
