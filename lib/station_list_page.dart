@@ -27,6 +27,13 @@ class StationListPage extends StatelessWidget {
       '울산',
       '부산'
     ];
+    if (startingStationName != null) {
+      stationList.remove(startingStationName);
+    }
+    if (endingStationName != null) {
+      stationList.remove(endingStationName);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(stationType),
