@@ -26,10 +26,10 @@ class StationListPage extends StatelessWidget {
       '부산'
     ];
     // 출발역, 도착역 선택시 리스트에서 제외.
-    if (startingStationName != null && stationType != '출발역') {
+    if (startingStationName != '선택' && stationType != '출발역') {
       stationList.remove(startingStationName);
     }
-    if (endingStationName != null && stationType != '도착역') {
+    if (endingStationName != '선택' && stationType != '도착역') {
       stationList.remove(endingStationName);
     }
 
@@ -59,7 +59,9 @@ class StationListPage extends StatelessWidget {
         } else if (stationType == '도착역') {
           endingStationName = stationName;
         }
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //homepage로 이동시 StationListPage 스택 삭제하며 이동
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
           //HomePage로 이동. 선택된 역 정보 전송
           return HomePage(stationType, startingStationName, endingStationName);
         }));

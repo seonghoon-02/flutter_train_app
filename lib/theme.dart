@@ -18,7 +18,7 @@ final lightTheme = ThemeData(
 
 final darkTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.blue,
+    seedColor: Colors.black,
     brightness: Brightness.dark,
 
     ///grey[200]
