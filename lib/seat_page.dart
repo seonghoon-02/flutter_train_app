@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-class SeatPage extends StatelessWidget {
+class SeatPage extends StatefulWidget {
   SeatPage(this.startingStationName, this.endingStationName);
 
   String startingStationName;
   String endingStationName;
+
+  @override
+  State<SeatPage> createState() => _SeatPageState();
+}
+
+class _SeatPageState extends State<SeatPage> {
+  int? selectedRow;
+  String? selectedCol;
+
+  void onSelected(int row, String col) {
+    setState(() {
+      selectedRow = row;
+      selectedCol = col;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +34,11 @@ class SeatPage extends StatelessWidget {
           Row(
             children: [
               Spacer(),
-              stationNameUi(startingStationName),
+              stationNameUi(widget.startingStationName),
               Spacer(),
               Icon(Icons.arrow_circle_right_outlined),
               Spacer(),
-              stationNameUi(endingStationName),
+              stationNameUi(widget.endingStationName),
               Spacer(),
             ],
           ),
@@ -71,12 +87,40 @@ class SeatPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20))),
 
-                ///버튼 선택시 호출할 함수
+                ///버튼 터치시 호출할 함수
                 onPressed: () {
-                  /// 화면 이동 코드 SeatPage로 이동
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  //   return SeatPage('수서', '부산');
-                  // }));
+                  if (selectedRow != null && selectedCol != null) {
+                    showCupertinoDialog(
+                        context: context,
+                        builder: (context) {
+                          return CupertinoAlertDialog(
+                            title: Text('예매 하시겠습니까?'),
+                            content: Text('좌석 : $selectedRow-$selectedCol'),
+                            actions: [
+                              CupertinoDialogAction(
+                                isDefaultAction: true,
+                                onPressed: () {
+                                  //취소 버튼 터치시 알림창 종료
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('취소'),
+                              ),
+                              CupertinoDialogAction(
+                                isDestructiveAction: true,
+                                onPressed: () {
+                                  // 스택에서 현재 페이지 포함 3번째 페이지로 이동
+                                  int count = 0;
+                                  Navigator.of(context).popUntil((route) {
+                                    count++;
+                                    return count == 3;
+                                  });
+                                },
+                                child: Text('확인'),
+                              ),
+                            ],
+                          );
+                        });
+                  }
                 },
                 child: Text(
                   '예매 하기',
@@ -105,11 +149,11 @@ class SeatPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        noSelectSeat(),
-        noSelectSeat(),
+        noSelectSeat(seatRowNum, 'A'),
+        noSelectSeat(seatRowNum, 'B'),
         stringInConBox50(seatRowNum.toStringAsFixed(0)),
-        noSelectSeat(),
-        noSelectSeat()
+        noSelectSeat(seatRowNum, 'C'),
+        noSelectSeat(seatRowNum, 'D')
       ],
     );
   }
@@ -129,14 +173,22 @@ class SeatPage extends StatelessWidget {
     );
   }
 
-  Padding noSelectSeat() {
+  Padding noSelectSeat(int rowNum, String colText) {
     return Padding(
       padding: const EdgeInsets.only(top: 4, bottom: 4, left: 2, right: 2),
-      child: Container(
-        height: 50,
-        width: 50,
-        decoration: BoxDecoration(
-            color: Colors.grey[300]!, borderRadius: BorderRadius.circular(8)),
+      child: GestureDetector(
+        onTap: () {
+          onSelected(rowNum, colText);
+        },
+        child: Container(
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+              color: rowNum == selectedRow && colText == selectedCol
+                  ? Colors.purple
+                  : Colors.grey[300],
+              borderRadius: BorderRadius.circular(8)),
+        ),
       ),
     );
   }

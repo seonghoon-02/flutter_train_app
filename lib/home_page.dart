@@ -62,11 +62,15 @@ class HomePage extends StatelessWidget {
 
                   ///버튼 선택시 호출할 함수
                   onPressed: () {
-                    /// 화면 이동 코드 SeatPage로 이동
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return SeatPage(startingStationName, endingStationName);
-                    }));
+                    // 출발역, 도착역이 선택되었을 때만 이동
+                    if (startingStationName != '선택' &&
+                        endingStationName != '선택') {
+                      /// 화면 이동 코드 SeatPage로 이동
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return SeatPage(startingStationName, endingStationName);
+                      }));
+                    }
                   },
                   child: Text(
                     '좌석선택',
