@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_train_app/home_page.dart';
 
@@ -27,6 +25,7 @@ class StationListPage extends StatelessWidget {
       '울산',
       '부산'
     ];
+    // 출발역, 도착역 선택시 리스트에서 제외.
     if (startingStationName != null && stationType != '출발역') {
       stationList.remove(startingStationName);
     }
@@ -42,6 +41,7 @@ class StationListPage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          //역이름 리스트 만틈 컬럼 생성
           for (var stationName in stationList)
             stationContainer(stationName, context),
         ],

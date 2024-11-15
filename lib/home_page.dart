@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_train_app/seat_page.dart';
 import 'package:flutter_train_app/station_list_page.dart';
@@ -15,10 +13,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        //앱바
         title: Text('기차 예매'),
         centerTitle: true,
       ),
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -28,12 +27,13 @@ class HomePage extends StatelessWidget {
               height: 200,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.secondaryContainer,
                 borderRadius: BorderRadius.all(
                   Radius.circular(20),
                 ),
               ),
               child: Row(
+                //출발역, 도착역 텍스트 부분
                 children: [
                   Spacer(),
                   choiceStation('출발역', startingStationName, context),
@@ -87,6 +87,8 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  // 출발역, 도착역 선택시 출발인지 도착인지 정보 넘기며 페이지 이동
+  //choiceStation : 현재 화면에 선택되어 있는 역 이름정보 넘김.
   Widget choiceStation(
       String stationType, String choiceStation, BuildContext context) {
     return GestureDetector(
