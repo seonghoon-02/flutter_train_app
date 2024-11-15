@@ -4,30 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_train_app/seat_page.dart';
 import 'package:flutter_train_app/station_list_page.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage(this.stationType, this.stationName);
+class HomePage extends StatelessWidget {
+  HomePage(this.stationType, this.startingStationName, this.endingStationName);
 
-  final String stationType;
-  final String stationName;
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  String startingStationName = '선택';
-  String endingStationName = '선택';
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (widget.stationType == '출발역' && startingStationName == '선택') {
-      startingStationName = widget.stationName;
-    } else if (widget.stationType == '도착역' && endingStationName == '선택') {
-      endingStationName = widget.stationName;
-    }
-  }
+  String stationType;
+  String startingStationName;
+  String endingStationName;
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +89,8 @@ class _HomePageState extends State<HomePage> {
       onTap: () {
         /// 화면 이동 코드 StationListPage로 이동
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return StationListPage(stationType);
+          return StationListPage(
+              stationType, startingStationName, endingStationName);
         }));
       },
       child: Column(
@@ -121,10 +104,15 @@ class _HomePageState extends State<HomePage> {
               color: Colors.grey,
             ),
           ),
-          Text(
-            choiceStation,
-            style: TextStyle(
-              fontSize: 40,
+          Container(
+            width: 150,
+            child: Center(
+              child: Text(
+                choiceStation,
+                style: TextStyle(
+                  fontSize: 40,
+                ),
+              ),
             ),
           ),
         ],

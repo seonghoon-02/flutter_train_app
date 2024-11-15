@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_train_app/home_page.dart';
 
 class StationListPage extends StatelessWidget {
-  StationListPage(this.stationType);
+  StationListPage(
+      this.stationType, this.startingStationName, this.endingStationName);
 
   String stationType;
+  String startingStationName;
+  String endingStationName;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +46,15 @@ class StationListPage extends StatelessWidget {
   GestureDetector stationContainer(String stationName, BuildContext context) {
     return GestureDetector(
       onTap: () {
+        // 출발역, 도착역 구분하여 저장
+        if (stationType == '출발역') {
+          startingStationName = stationName;
+        } else if (stationType == '도착역') {
+          endingStationName = stationName;
+        }
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return HomePage(stationType, stationName);
+          //HomePage로 이동. 선택된 역 정보 전송
+          return HomePage(stationType, startingStationName, endingStationName);
         }));
       },
       child: Container(
