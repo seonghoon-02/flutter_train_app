@@ -27,10 +27,10 @@ class StationListPage extends StatelessWidget {
       '울산',
       '부산'
     ];
-    if (startingStationName != null) {
+    if (startingStationName != null && stationType != '출발역') {
       stationList.remove(startingStationName);
     }
-    if (endingStationName != null) {
+    if (endingStationName != null && stationType != '도착역') {
       stationList.remove(endingStationName);
     }
 
