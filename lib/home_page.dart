@@ -4,7 +4,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_train_app/seat_page.dart';
 import 'package:flutter_train_app/station_list_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  HomePage(this.stationType, this.stationName);
+
+  final String stationType;
+  final String stationName;
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String startingStationName = '선택';
+  String endingStationName = '선택';
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.stationType == '출발역' && startingStationName == '선택') {
+      startingStationName = widget.stationName;
+    } else if (widget.stationType == '도착역' && endingStationName == '선택') {
+      endingStationName = widget.stationName;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +54,7 @@ class HomePage extends StatelessWidget {
               child: Row(
                 children: [
                   Spacer(),
-                  choiceStation('출발역', '선택', context),
+                  choiceStation('출발역', startingStationName, context),
                   Spacer(),
                   Container(
                     width: 2, // 선의 너비
@@ -38,7 +62,7 @@ class HomePage extends StatelessWidget {
                     color: Colors.grey[400], // 선 색상
                   ),
                   Spacer(),
-                  choiceStation('도착역', '선택', context),
+                  choiceStation('도착역', endingStationName, context),
                   Spacer(),
                 ],
               ),
@@ -59,7 +83,7 @@ class HomePage extends StatelessWidget {
                     /// 화면 이동 코드 SeatPage로 이동
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return SeatPage('수서', '부산');
+                      return SeatPage(startingStationName, endingStationName);
                     }));
                   },
                   child: Text(

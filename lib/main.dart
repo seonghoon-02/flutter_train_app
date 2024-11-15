@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       // themeMode: ThemeMode.light,// light or dark
       // theme: lightTheme,
       // darkTheme: darkTheme,
-      home: HomePage(),
+      home: HomePage('', ''),
     );
   }
 }
