@@ -79,7 +79,7 @@ class _SeatPageState extends State<SeatPage> {
             ),
           ),
           SizedBox(
-            width: 350,
+            width: 370,
             height: 50,
             //좌석 선택 버튼
             child: ElevatedButton(

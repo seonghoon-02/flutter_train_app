@@ -53,6 +53,8 @@ class HomePage extends StatelessWidget {
               height: 20,
             ),
             SizedBox(
+              height: 50,
+              width: 370,
               //좌석 선택 버튼
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
