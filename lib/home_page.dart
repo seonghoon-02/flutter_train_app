@@ -58,8 +58,6 @@ class HomePage extends StatelessWidget {
                       backgroundColor: Colors.purple,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20))),
-
-                  ///버튼 선택시 호출할 함수
                   onPressed: () {
                     // 출발역, 도착역이 선택되었을 때만 이동
                     if (StationListSetting.startingStationName != '선택' &&

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_train_app/station_list_setting.dart';
 
 class SeatPage extends StatefulWidget {
   SeatPage(this.startingStationName, this.endingStationName);
@@ -96,7 +97,8 @@ class _SeatPageState extends State<SeatPage> {
                         builder: (context) {
                           return CupertinoAlertDialog(
                             title: Text('예매 하시겠습니까?'),
-                            content: Text('좌석 : $selectedRow-$selectedCol'),
+                            content: Text(
+                                '좌석 : $selectedRow-$selectedCol, 가격 : ${StationListSetting.getPrice(StationListSetting.startingStationName, StationListSetting.endingStationName)}원'),
                             actions: [
                               CupertinoDialogAction(
                                 isDefaultAction: true,

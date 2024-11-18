@@ -22,7 +22,7 @@ class StationListPage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //역이름 리스트 만틈 컬럼 생성
+          //역이름, 가격 리스트 만드는 컬럼 생성
           for (int i = 0; i < stationList.length; i++)
             stationContainer(stationList[i], priceList[i], context),
         ],
@@ -43,7 +43,6 @@ class StationListPage extends StatelessWidget {
         //homepage로 이동시 StationListPage 스택 삭제하며 이동
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
-          //HomePage로 이동. 선택된 역 정보 전송
           return HomePage();
         }));
       },

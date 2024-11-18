@@ -15,8 +15,10 @@ class StationListSetting {
     '울산',
     '부산'
   ];
+  //초기 값으로 0원 리스트 생성
   static List<String> priceList = List.generate(11, (index) => '0원');
 
+  ///역 이름과 값을 가진 이중 리스트 반환
   static List<List<String>> getStationList(String stationType) {
     List<List<String>> stationAndPriceList = [];
     List<String> tempStationList = [];
@@ -27,8 +29,8 @@ class StationListSetting {
         if (stationList[i] != endingStationName) {
           tempStationList.add(stationList[i]);
 
-          int price =
-              (stationList.indexOf(endingStationName) - i).abs() * 10000;
+          //선택된 인덱스 기준으로 10000원 단위 가격 표시
+          int price = getPrice(stationList[i], endingStationName);
           tempPriceList.add('$price원');
         }
       }
@@ -36,8 +38,7 @@ class StationListSetting {
       for (int i = 0; i < stationList.length; i++) {
         if (stationList[i] != startingStationName) {
           tempStationList.add(stationList[i]);
-          int price =
-              (stationList.indexOf(startingStationName) - i).abs() * 10000;
+          int price = getPrice(startingStationName, stationList[i]);
           tempPriceList.add('$price원');
         }
       }
@@ -55,22 +56,16 @@ class StationListSetting {
     return stationAndPriceList;
   }
 
-  // static List<String> getPriceList(String stationName) {
-  //   stationPriceList = [];
-  //   print(2222);
-  //   if (stationName == '선택') {
-  //     for (int i = 0; i < stationList.length; i++) {
-  //       stationPriceList.add('0원');
-  //     }
-  //   } else {
-  //     for (int i = 0; i < stationList.length; i++) {
-  //       if (i != stationList.indexOf(stationName)) {
-  //         int price = (stationList.indexOf(stationName) - i).abs() * 10000;
-  //         stationPriceList.add('$price원');
-  //       }
-  //     }
-  //   }
-  //   print(1111);
-  //   return stationPriceList;
-  // }
+  static int getPrice(String startingStationName, String endingStationName) {
+    int price;
+    if (startingStationName != '선택' || endingStationName != '선택') {
+      price = (stationList.indexOf(startingStationName) -
+                  stationList.indexOf(endingStationName))
+              .abs() *
+          10000;
+    } else {
+      price = 0;
+    }
+    return price;
+  }
 }
