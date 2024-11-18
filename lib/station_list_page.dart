@@ -9,10 +9,17 @@ class StationListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// 역 리스트
-    List<String> stationList =
-        StationListSetting.getStationList(stationType)[0];
-    List<String> priceList = StationListSetting.getStationList(stationType)[1];
+    List<String> stationList = [];
+    List<String> priceList = [];
+
+    try {
+      // 역 리스트 불러오기
+      stationList = StationListSetting.getStationList(stationType)[0];
+      priceList = StationListSetting.getStationList(stationType)[1];
+    } catch (e) {
+      // 오류가 발생하면 예외 메시지를 출력
+      print('Error: $e 리스트를 불러오는데 실패하였습니다.');
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -55,6 +62,7 @@ class StationListPage extends StatelessWidget {
     );
   }
 
+//리스트 컨테이너 UI
   Container listContainerUI(String stationName,
       {Alignment alignment = Alignment.centerLeft}) {
     return Container(
