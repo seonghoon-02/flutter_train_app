@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 final lightTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.white,
+    seedColor: Colors.pinkAccent,
     brightness: Brightness.light,
 
     ///grey[200]

@@ -25,6 +25,7 @@ class StationListSetting {
     List<String> tempPriceList = [];
 
     try {
+      // 이미 역이 선택되어 있는지 확인 후 역 이름 리스트, 가격 리스트 반환
       if (stationType == '출발역' && endingStationName != '선택') {
         for (int i = 0; i < stationList.length; i++) {
           if (stationList[i] != endingStationName) {
@@ -51,6 +52,7 @@ class StationListSetting {
     }
 
     if (tempStationList.length > 0) {
+      //반환할 list 정리
       stationAndPriceList.add(tempStationList);
       stationAndPriceList.add(tempPriceList);
     } else {
@@ -61,6 +63,7 @@ class StationListSetting {
     return stationAndPriceList;
   }
 
+  //가격 반환하는 함수
   static int getPrice(String startingStationName, String endingStationName) {
     int price;
     if (startingStationName != '선택' || endingStationName != '선택') {
