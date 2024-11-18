@@ -1,37 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_train_app/home_page.dart';
+import 'package:flutter_train_app/station_list_setting.dart';
 
 class StationListPage extends StatelessWidget {
-  StationListPage(
-      this.stationType, this.startingStationName, this.endingStationName);
+  StationListPage(this.stationType);
 
   String stationType;
-  String startingStationName;
-  String endingStationName;
 
   @override
   Widget build(BuildContext context) {
     /// 역 리스트
-    List<String> stationList = [
-      '수서',
-      '동탄',
-      '평택지제',
-      '천안아산',
-      '오송',
-      '대전',
-      '김천구미',
-      '동대구',
-      '경주',
-      '울산',
-      '부산'
-    ];
-    // 출발역, 도착역 선택시 리스트에서 제외.
-    if (startingStationName != '선택' && stationType != '출발역') {
-      stationList.remove(startingStationName);
-    }
-    if (endingStationName != '선택' && stationType != '도착역') {
-      stationList.remove(endingStationName);
-    }
+    List<String> stationList = StationListSetting.getStationList(stationType);
 
     return Scaffold(
       appBar: AppBar(
@@ -53,17 +32,16 @@ class StationListPage extends StatelessWidget {
   GestureDetector stationContainer(String stationName, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // 출발역, 도착역 구분하여 저장
         if (stationType == '출발역') {
-          startingStationName = stationName;
+          StationListSetting.startingStationName = stationName;
         } else if (stationType == '도착역') {
-          endingStationName = stationName;
+          StationListSetting.endingStationName = stationName;
         }
         //homepage로 이동시 StationListPage 스택 삭제하며 이동
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
           //HomePage로 이동. 선택된 역 정보 전송
-          return HomePage(stationType, startingStationName, endingStationName);
+          return HomePage();
         }));
       },
       child: Container(

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_train_app/seat_page.dart';
 import 'package:flutter_train_app/station_list_page.dart';
+import 'package:flutter_train_app/station_list_setting.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage(this.stationType, this.startingStationName, this.endingStationName);
-
-  String stationType;
-  String startingStationName;
-  String endingStationName;
+  HomePage();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +33,8 @@ class HomePage extends StatelessWidget {
                 //출발역, 도착역 텍스트 부분
                 children: [
                   Spacer(),
-                  choiceStation('출발역', startingStationName, context),
+                  choiceStation(
+                      '출발역', StationListSetting.startingStationName, context),
                   Spacer(),
                   Container(
                     width: 2, // 선의 너비
@@ -44,7 +42,8 @@ class HomePage extends StatelessWidget {
                     color: Colors.grey[400], // 선 색상
                   ),
                   Spacer(),
-                  choiceStation('도착역', endingStationName, context),
+                  choiceStation(
+                      '도착역', StationListSetting.endingStationName, context),
                   Spacer(),
                 ],
               ),
@@ -65,12 +64,13 @@ class HomePage extends StatelessWidget {
                   ///버튼 선택시 호출할 함수
                   onPressed: () {
                     // 출발역, 도착역이 선택되었을 때만 이동
-                    if (startingStationName != '선택' &&
-                        endingStationName != '선택') {
+                    if (StationListSetting.startingStationName != '선택' &&
+                        StationListSetting.endingStationName != '선택') {
                       /// 화면 이동 코드 SeatPage로 이동
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return SeatPage(startingStationName, endingStationName);
+                        return SeatPage(StationListSetting.startingStationName,
+                            StationListSetting.endingStationName);
                       }));
                     }
                   },
@@ -97,8 +97,7 @@ class HomePage extends StatelessWidget {
       onTap: () {
         /// 화면 이동 코드 StationListPage로 이동
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return StationListPage(
-              stationType, startingStationName, endingStationName);
+          return StationListPage(stationType);
         }));
       },
       child: Column(
