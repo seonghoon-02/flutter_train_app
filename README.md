@@ -1,16 +1,62 @@
-# flutter_train_app
+<h1  align="center">
+<p  align="center">기차 예매 서비스
 
-A new Flutter project.
+</h1>
+</p>
 
-## Getting Started
+## 프로젝트 개요
 
-This project is a starting point for a Flutter application.
+### 기차역과 좌석을 선택하여 예매하는 앱
 
-A few resources to get you started if this is your first Flutter project:
+#### 💡 '기차 예매 서비스'는 제작하면서 flutter 기초를 익히기 위해 만들어졌습니다.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 팀원 구성
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| **고성훈** |
+
+### 프로젝트 일정
+
+24/11/13~24/11/18
+
+### 사용 문법 및 위젯
+
+| ListView | CupertinoAlertDialog | Navigator | GestureDetector |
+
+## 주요 기능
+
+| 홈 화면               | 역 선택 화면         | 좌석 선택 화면 |
+| --------------------- | -------------------- | -------------- |
+| 출발역, 도착역을 선택 | 리스트에서 역을 선택 | 좌석 선택      |
+
+- 출발역, 도착역 선택 시 표 가격 표시
+- 좌석 선택 후 예매 시 선택한 좌석과 가격 표시
+
+<br/>
+
+## TroubleShooting
+
+#### listview 사이즈 초과 이슈
+
+1. 문제 정의
+
+- listview 위젯 사용시 사이즈가 초과되어 에러
+
+2. 사실 수집
+
+- listview를 정해진 화면 사이즈에서 구현해야함.
+
+3. 원인 추론
+
+- listview 사이즈 조절 방법 미숙
+
+4. 조사 방법 결정
+
+- 구글 서칭
+
+5. 조사 방법 구현
+
+- Container위젯으로 listview위젯을 감쌈.
+
+6. 결과 관찰
+
+- 상위 위젯인 Container위젯의 크기에 따라 listview위젯이 변경됨 확인
