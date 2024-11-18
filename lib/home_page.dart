@@ -4,8 +4,6 @@ import 'package:flutter_train_app/station_list_page.dart';
 import 'package:flutter_train_app/station_list_setting.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

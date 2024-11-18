@@ -10,7 +10,9 @@ class StationListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// 역 리스트
-    List<String> stationList = StationListSetting.getStationList(stationType);
+    List<String> stationList =
+        StationListSetting.getStationList(stationType)[0];
+    List<String> priceList = StationListSetting.getStationList(stationType)[1];
 
     return Scaffold(
       appBar: AppBar(
@@ -21,15 +23,16 @@ class StationListPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //역이름 리스트 만틈 컬럼 생성
-          for (var stationName in stationList)
-            stationContainer(stationName, context),
+          for (int i = 0; i < stationList.length; i++)
+            stationContainer(stationList[i], priceList[i], context),
         ],
       ),
     );
   }
 
   /// 역 ui 함수
-  GestureDetector stationContainer(String stationName, BuildContext context) {
+  GestureDetector stationContainer(
+      String stationName, String price, BuildContext context) {
     return GestureDetector(
       onTap: () {
         if (stationType == '출발역') {
@@ -44,26 +47,36 @@ class StationListPage extends StatelessWidget {
           return HomePage();
         }));
       },
-      child: Container(
-        height: 50,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              // 밑변에 선 추가
-              color: Colors.grey[300]!,
-              width: 1, // 선의 두께
-            ),
+      child: Row(
+        children: [
+          listContainerUI(stationName),
+          listContainerUI(price, alignment: Alignment.centerRight),
+        ],
+      ),
+    );
+  }
+
+  Container listContainerUI(String stationName,
+      {Alignment alignment = Alignment.centerLeft}) {
+    return Container(
+      height: 50,
+      width: 200,
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            // 밑변에 선 추가
+            color: Colors.grey[300]!,
+            width: 1, // 선의 두께
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              stationName,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 15),
+        child: Align(
+          alignment: alignment,
+          child: Text(
+            stationName,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
       ),
